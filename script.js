@@ -22,9 +22,9 @@ class Star {
     this.sp = Math.random()*.015+.005;
     this.col = Math.random() < .12 ? '#E6228A' : '#e8f0f8';
     const a = Math.random()*Math.PI*2;
-    const speed = Math.random()*.08+.02;
+    const speed = Math.random()*.35+.1;
     this.vx = Math.cos(a)*speed;
-    this.vy = Math.sin(a)*speed - .015; // slight upward drift
+    this.vy = Math.sin(a)*speed - .05;
   }
   update(){
     this.ph += this.sp;
@@ -71,9 +71,9 @@ class Constellation {
     this.ph = Math.random()*Math.PI*2;
     this.sp = Math.random()*.6+.3;
     const a = Math.random()*Math.PI*2;
-    const speed = Math.random()*.06+.015;
+    const speed = Math.random()*.4+.15;
     this.vx = Math.cos(a)*speed;
-    this.vy = Math.sin(a)*speed - .01; // slight upward drift
+    this.vy = Math.sin(a)*speed - .08;
     this.jitterAngle = Math.random()*Math.PI*2;
     this.jitterSpeed = Math.random()*.04+.01;
     this.jitterRadius = 10 + Math.random()*14;
