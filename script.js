@@ -16,15 +16,17 @@ class Star {
   reset(){
     this.x = Math.random()*W;
     this.y = Math.random()*H;
-    this.r = Math.random()*1.1+.3;
-    this.baseOp = Math.random()*.5+.15;
+    this.r = Math.random()*0.1+.3;
+    this.baseOp = Math.random()*.3+.5;
     this.ph = Math.random()*Math.PI*2;
-    this.sp = Math.random()*.015+.005;
+    this.sp = Math.random()*.0001+.0001;
     this.col = Math.random() < .12 ? '#E6228A' : '#e8f0f8';
+    
     const a = Math.random()*Math.PI*2;
-    const speed = Math.random()*.35+.1;
+    const speed = Math.random() * 0.00001 + 0.00001; 
+    
     this.vx = Math.cos(a)*speed;
-    this.vy = Math.sin(a)*speed - .05;
+    this.vy = Math.sin(a)*speed - 0.0005; 
   }
   update(){
     this.ph += this.sp;
@@ -54,14 +56,13 @@ function buildStars(){
 }
 
 // ── ZODIAC CONSTELLATIONS ────────────────────────────────
-// Simplified star-and-line glyphs, normalized to a 0–1 box
 const ZODIAC_SHAPES = [
-  { pts:[[0,0.5],[0.28,0.32],[0.55,0.2],[0.85,0.05],[1,0]], edges:[[0,1],[1,2],[2,3],[3,4]] },                     // Aries
-  { pts:[[0,0.85],[0.18,0.55],[0.4,0.35],[0.6,0.1],[0.82,0.32],[1,0.6],[0.6,0.6]], edges:[[0,1],[1,2],[2,3],[3,4],[4,5],[4,6],[2,6]] }, // Leo
-  { pts:[[0.05,0],[0.05,0.4],[0.05,0.85],[0.45,0],[0.45,0.4],[0.45,0.85]], edges:[[0,1],[1,2],[3,4],[4,5],[2,5]] }, // Gemini
-  { pts:[[0.5,0],[0,0.5],[1,0.5],[0.5,1]], edges:[[0,1],[0,2],[1,3],[2,3]] },                                       // Libra
-  { pts:[[0,1],[0.3,0.62],[0.55,0.3],[1,0],[0.5,0.55]], edges:[[0,1],[1,2],[2,3],[1,4]] },                         // Sagittarius
-  { pts:[[0,0.5],[0.25,0.18],[0.5,0.62],[0.75,0.28],[1,0.5]], edges:[[0,1],[1,2],[2,3],[3,4]] },                   // Aquarius
+  { pts:[[0,0.5],[0.28,0.32],[0.55,0.2],[0.85,0.05],[1,0]], edges:[[0,1],[1,2],[2,3],[3,4]] },
+  { pts:[[0,0.85],[0.18,0.55],[0.4,0.35],[0.6,0.1],[0.82,0.32],[1,0.6],[0.6,0.6]], edges:[[0,1],[1,2],[2,3],[3,4],[4,5],[4,6],[2,6]] },
+  { pts:[[0.05,0],[0.05,0.4],[0.05,0.85],[0.45,0],[0.45,0.4],[0.45,0.85]], edges:[[0,1],[1,2],[3,4],[4,5],[2,5]] },
+  { pts:[[0.5,0],[0,0.5],[1,0.5],[0.5,1]], edges:[[0,1],[0,2],[1,3],[2,3]] },
+  { pts:[[0,1],[0.3,0.62],[0.55,0.3],[1,0],[0.5,0.55]], edges:[[0,1],[1,2],[2,3],[1,4]] },
+  { pts:[[0,0.5],[0.25,0.18],[0.5,0.62],[0.75,0.28],[1,0.5]], edges:[[0,1],[1,2],[2,3],[3,4]] },
 ];
 
 class Constellation {
@@ -71,9 +72,12 @@ class Constellation {
     this.ph = Math.random()*Math.PI*2;
     this.sp = Math.random()*.6+.3;
     const a = Math.random()*Math.PI*2;
-    const speed = Math.random()*.4+.15;
-    this.vx = Math.cos(a)*speed;
-    this.vy = Math.sin(a)*speed - .08;
+    
+    // --- ADJUSTED FOR SLOWER SPEED ---
+    const speed = Math.random() * 0.1 + 0.05; 
+    this.vx = Math.cos(a) * speed;
+    this.vy = Math.sin(a) * speed - 0.02; // Reduced vertical drift
+    
     this.jitterAngle = Math.random()*Math.PI*2;
     this.jitterSpeed = Math.random()*.04+.01;
     this.jitterRadius = 10 + Math.random()*14;
@@ -98,7 +102,6 @@ class Constellation {
     const oy = Math.sin(time*this.jitterSpeed*0.8 + this.jitterAngle) * this.jitterRadius;
     const pts = this.points(ox, oy);
 
-    // connecting lines
     ctx.save();
     ctx.strokeStyle = 'rgba(230,34,138,.18)';
     ctx.lineWidth = 1;
@@ -109,7 +112,6 @@ class Constellation {
     });
     ctx.stroke();
 
-    // star nodes
     pts.forEach((p,i)=>{
       const tw = 0.55 + 0.45*Math.sin(time*this.sp + this.ph + i*1.3);
       const r = 1.4 + tw*1.1;
@@ -144,10 +146,9 @@ function buildConstellations(){
 resize();
 window.addEventListener('resize', resize);
 
-// ── RENDER LOOP ─────────────────────────────────────────
 let time = 0;
 function animate(){
-  time += 0.016;
+  time += 0.0001;
   ctx.clearRect(0,0,W,H);
   stars.forEach(s=>{ s.update(); s.draw(); });
   constellations.forEach(c=>{ c.update(); c.draw(time); });
@@ -155,10 +156,9 @@ function animate(){
 }
 animate();
 
-// ── SCROLL REVEAL ────────────────────────────────────────
 const reveals=document.querySelectorAll('.reveal');
 reveals.forEach(el=>
   new IntersectionObserver(entries=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
   },{threshold:.12}).observe(el)
-);
+);s

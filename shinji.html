@@ -18,7 +18,7 @@
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
-    <a href="#contact" class="nav-hire">Hire Me</a>
+    <a href="#contact" class="nav-hire">contact</a>
   </div>
 </nav>
 
@@ -28,19 +28,30 @@
     <div class="badge-dot"></div>
     <span class="badge-text">Available for opportunities</span>
   </div>
-  <h1 class="hero-name">
-    SHIN<span class="cyan">JI</span><br>
-    <span class="outline">PORTFOLIO</span>
-  </h1>
-  <div class="hero-role">IT Student &nbsp;/&nbsp; Web Developer &nbsp;/&nbsp; Cebu Eastern College</div>
-  <p class="hero-desc">
-    Building <strong>full-stack web systems</strong> that are clean, functional, and visually sharp.
-    Passionate about <strong>design-driven development</strong> — from C# backends to polished frontends.
-  </p>
-  <div class="hero-actions">
-    <a href="#projects" class="btn-primary">View My Work</a>
-    <a href="#contact" class="btn-outline">Get in Touch</a>
+
+  <div class="hero-top">
+    <div class="hero-text">
+      <h1 class="hero-name">
+        SHIN<span class="cyan">JI</span><br>
+        <span class="outline">PORTFOLIO</span>
+      </h1>
+      <div class="hero-role">IT Student &nbsp;/&nbsp; Web Developer &nbsp;/&nbsp; Cebu Eastern College</div>
+      <p class="hero-desc">
+        Building <strong>full-stack web systems</strong> that are clean, functional, and visually sharp.
+        Passionate about <strong>design-driven development</strong> — from C# backends to polished frontends.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-photo">
+      <div class="hero-photo-ring"></div>
+      <img src="shinji.png" alt="Shinji" class="hero-photo-img">
+    </div>
   </div>
+
   <div class="hero-scroll">
     <div class="scroll-bar"></div>
     <span class="scroll-txt">Scroll down</span>
@@ -165,7 +176,8 @@
         <div class="skill-tags">
           <span class="tag">Git</span><span class="tag">GitHub</span>
           <span class="tag">VS Code</span><span class="tag">Visual Studio</span>
-          <span class="tag">Swagger</span><span class="tag">Postman</span>
+          <span class="tag">Intellij IDEA</span>
+          <span class="tag">MySQL Workbench</span>
         </div>
       </div>
       <div class="skill-card reveal rd2">
@@ -183,7 +195,8 @@
         <div class="skill-tags">
           <span class="tag">WST12</span><span class="tag">CP12</span>
           <span class="tag">Web Systems</span><span class="tag">OOP</span>
-          <span class="tag">Capstone</span>
+          <span class="tag">Platform Technology</span><span class="tag">Information Management</span>
+          <span class="tag">Human Computer Interaction</span>
         </div>
       </div>
     </div>
@@ -212,19 +225,19 @@
             <span class="proj-tag">Minimal API</span><span class="proj-tag">HTML/CSS/JS</span>
             <span class="proj-tag">Session Auth</span><span class="proj-tag">In-Memory</span>
           </div>
-          <a href="#" class="proj-link">View Project →</a>
+          <!--<a href="#" class="proj-link">View Project →</a>-->
         </div>
         <div>
           <!-- Visual card mockup -->
-          <div style="background:rgba(55,67,101,.05);border:1px solid var(--border);padding:32px;font-family:'Space Mono',monospace;font-size:.65rem;line-height:2;color:rgba(55,67,101,.6);">
-            <div style="color:var(--cyan);margin-bottom:12px;">● CEC Grade System</div>
+          <div style="background:rgba(55,67,101,.05);border:1px solid var(--border);padding:32px;font-family:'Space Mono',monospace;font-size:.85rem;line-height:2;color:rgba(245, 245, 245, 0.6);">
+            <div style="color:var(--cyan);margin-bottom:12px;font-size:.85rem;">● CEC Grade System</div>
             <div>GET  /api/students   ✓</div>
             <div>POST /api/grades     ✓</div>
             <div>GET  /api/enrollment ✓</div>
             <div>POST /api/auth/login ✓</div>
-            <div style="margin-top:12px;color:rgba(55,67,101,.3);">// Admin + Teacher roles</div>
-            <div style="color:rgba(55,67,101,.3);">// Session-based auth</div>
-            <div style="color:rgba(55,67,101,.3);">// In-memory storage</div>
+            <div style="margin-top:12px;color:rgba(239, 240, 243, 0.3);">// Admin + Teacher roles</div>
+            <div style="color:rgba(244, 246, 248, 0.3);">// Session-based auth</div>
+            <div style="color:#ffffff;">// In-memory storage</div>
             <div style="margin-top:12px;color:#5bf5a0;">200 OK — Defense Passed ✦</div>
           </div>
         </div>
@@ -238,7 +251,7 @@
           <span class="proj-tag">React</span><span class="proj-tag">ASP.NET Core</span>
           <span class="proj-tag">Swagger</span><span class="proj-tag">CSS</span>
         </div>
-        <a href="#" class="proj-link">View Project →</a>
+        <!--<a href="#" class="proj-link">View Project →</a>-->
       </div>
 
       <div class="proj-card reveal rd2">
@@ -249,18 +262,7 @@
           <span class="proj-tag">ASP.NET Core</span><span class="proj-tag">EF Core</span>
           <span class="proj-tag">SQL Server</span><span class="proj-tag">OpenXML</span>
         </div>
-        <a href="#" class="proj-link">View Project →</a>
-      </div>
-
-      <div class="proj-card reveal rd1">
-        <div class="proj-num">04</div>
-        <h3 class="proj-name">Admin Dashboards</h3>
-        <p class="proj-desc">A series of teacher and admin-themed dashboards with dark aesthetics, glassmorphism cards, hover animations, rotating Bible verses, and Three.js Rasengan-inspired header animations.</p>
-        <div class="proj-stack">
-          <span class="proj-tag">HTML/CSS/JS</span><span class="proj-tag">Three.js</span>
-          <span class="proj-tag">Glassmorphism</span><span class="proj-tag">Dark UI</span>
-        </div>
-        <a href="#" class="proj-link">View Project →</a>
+        <!--<a href="#" class="proj-link">View Project →</a>-->
       </div>
 
     </div>
@@ -275,11 +277,11 @@
   </h2>
   <div class="contact-links reveal rd1">
     <a href="mailto:shinjileicalvo@gmail.com" class="contact-link">✉ Email</a>
-    <a href="https://github.com/" target="_blank" class="contact-link">⌥ GitHub</a>
-    <a href="https://linkedin.com/" target="_blank" class="contact-link">in LinkedIn</a>
+    <a href="https://github.com/Shinji-Lei" target="_blank" class="contact-link">⌥ GitHub</a>
+    <a href="https://www.facebook.com/shinji201/" target="_blank" class="contact-link">facebook</a>
     <a href="#" class="contact-link">📄 Resume</a>
   </div>
-  <a href="mailto:shinji@email.com" class="contact-email reveal rd2">shinji@Gmail.com</a>
+  <a href="mailto:shinjileicalvo@gmail.com" class="contact-email reveal rd2">shinjileicalvo@Gmail.com</a>
 </section>
 
 <!-- FOOTER -->
