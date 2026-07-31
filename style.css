@@ -97,7 +97,7 @@ section { position:relative; z-index:1; min-height:100vh; display:flex; align-it
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
   font-size: clamp(4.5rem, 13vw, 11rem);
-  line-height: 1.1;
+  line-height: .8;
   letter-spacing: .18em;
   color: #ffffff;
   text-align: center;
@@ -278,6 +278,18 @@ section { position:relative; z-index:1; min-height:100vh; display:flex; align-it
   transition:color .2s, border-color .2s;
 }
 .proj-link:hover { color:var(--cyan); border-color:var(--cyan); }
+.proj-visit-btn {
+  display: inline-block;
+  font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: .1em;
+  text-transform: uppercase; text-decoration: none;
+  color: #04060D; background: var(--cyan);
+  padding: 12px 26px;
+  transition: background .2s, transform .2s;
+}
+.proj-visit-btn:hover {
+  background: #F0479E;
+  transform: translateY(-2px);
+}
 .proj-card.featured { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
 .proj-card.featured .proj-name { font-size:clamp(2rem,4vw,3.5rem); }
 
