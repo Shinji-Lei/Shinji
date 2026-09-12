@@ -11,7 +11,7 @@
 
   // Backend URL — swap this to your Cloudflare Tunnel URL when deployed
   // e.g. 'https://api.yourdomain.com'
-  const BACKEND_URL = 'http://localhost:3001';
+  const BACKEND_URL = 'https://destinations-portraits-spider-parish.trycloudflare.com';
 
   let open = false, said_hi = false, sending = false;
 
