@@ -1,0 +1,5 @@
+ai-portfolio/backend/node_modules/
+ai-portfolio/backend/.env
+ai-portfolio/frontend/
+.DS_Store
+Thumbs.db
