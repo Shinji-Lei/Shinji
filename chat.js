@@ -32,7 +32,7 @@
     icoX.style.display    = 'block';
     label.style.display   = 'none';
     if(window.innerWidth < 520) bd.style.display = 'block';
-    if(!said_hi){ said_hi = true; addMsg('ai', "Hey! 👋 I'm Shinji's AI assistant. Ask me anything — about him, or anything else!"); }
+    if(!said_hi){ said_hi = true; addMsg('ai', "Hey! 👋 I'm Shinji. you can ask anything!"); }
   }
 
   function close(){
