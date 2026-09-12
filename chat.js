@@ -11,7 +11,7 @@
 
   // Backend URL — swap this to your Cloudflare Tunnel URL when deployed
   // e.g. 'https://api.yourdomain.com'
-  const BACKEND_URL = 'https://dubai-system-representatives-reporting.trycloudflare.com';
+  const BACKEND_URL = 'https://prostate-instrumentation-cute-confident.trycloudflare.com';
 
   let open = false, said_hi = false, sending = false;
 
