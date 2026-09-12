@@ -5,6 +5,10 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 
+// Trust the first proxy hop (Cloudflare Tunnel) so express-rate-limit can
+// safely read X-Forwarded-For without throwing a validation error.
+app.set('trust proxy', 1);
+
 // ---- Config ----
 const PORT = process.env.PORT || 3001;
 // Comma-separated list in .env, e.g.: http://127.0.0.1:5500,https://shinji-pu6z.vercel.app
@@ -15,7 +19,6 @@ const MAX_QUESTION_LENGTH = 1000;
 const OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2';
 
-// ---- Who the AI is representing ----
 const SYSTEM_PROMPT = `You are Shinji's AI assistant, embedded in his personal portfolio website.
 You can answer general questions too, not just questions about Shinji -- but when asked about him, use the facts below. Keep answers concise, friendly, and use a couple of emojis where natural.
 
@@ -47,7 +50,6 @@ Personality notes: Shinji has a sharp eye for dark-themed, glassmorphism UI desi
 
 If asked something you don't know about Shinji specifically, say you're not sure and suggest reaching out via the Contact section. For general knowledge questions unrelated to Shinji, just answer normally and helpfully.`;
 
-// ---- Middleware ----
 app.use(express.json({ limit: '10kb' }));
 app.use(
   cors({
