@@ -161,4 +161,61 @@ reveals.forEach(el=>
   new IntersectionObserver(entries=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
   },{threshold:.12}).observe(el)
-);s
+);
+
+// ── CERTIFICATES: click image to expand + center + blur bg + nav ──
+document.addEventListener('DOMContentLoaded', () => {
+  const lightbox = document.getElementById('cert-lightbox');
+  const lbImg    = document.getElementById('cert-lightbox-img');
+  const lbPrev   = document.getElementById('cert-lightbox-prev');
+  const lbNext   = document.getElementById('cert-lightbox-next');
+
+  let currentIndex = 0;
+
+  function getImages() {
+    return Array.from(document.querySelectorAll('.cert-img'));
+  }
+
+  // Fade the current image out, swap the src, fade it back in
+  function showCert(index) {
+    const images = getImages();
+    if (!images.length) return;
+    currentIndex = (index + images.length) % images.length;
+
+    lbImg.style.opacity = 0;
+    lbImg.style.transform = 'scale(.95)';
+    setTimeout(() => {
+      lbImg.src = images[currentIndex].src;
+      lbImg.style.opacity = 1;
+      lbImg.style.transform = 'scale(1)';
+    }, 150);
+  }
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lbImg.src = getImages()[index].src;
+    lightbox.classList.add('open');
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+  }
+
+  getImages().forEach((img, i) => {
+    img.addEventListener('click', () => openLightbox(i));
+  });
+
+  lbPrev.addEventListener('click', (e) => { e.stopPropagation(); showCert(currentIndex - 1); });
+  lbNext.addEventListener('click', (e) => { e.stopPropagation(); showCert(currentIndex + 1); });
+
+  // Click the blurred backdrop (not the image or arrows) to close
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showCert(currentIndex - 1);
+    if (e.key === 'ArrowRight') showCert(currentIndex + 1);
+  });
+});

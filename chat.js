@@ -9,9 +9,40 @@
   const icoChat = fab.querySelector('.icon-chat');
   const icoX    = fab.querySelector('.icon-close');
 
-  // Backend URL — swap this to your Cloudflare Tunnel URL when deployed
-  // e.g. 'https://api.yourdomain.com'
-  const BACKEND_URL = 'https://prostate-instrumentation-cute-confident.trycloudflare.com';
+  // Backend URL — update this whenever the Cloudflare tunnel URL changes
+  const BACKEND_URL = 'https://dubai-system-representatives-reporting.trycloudflare.com';
+
+  // One retry after a short delay smooths over brief tunnel reconnects
+  // (the free quick tunnel occasionally drops and re-establishes its connection).
+  async function askBackend(text){
+    const res = await fetch(`${BACKEND_URL}/ask`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: text }),
+    });
+    if(!res.ok){
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `Request failed with status ${res.status}`);
+    }
+    const data = await res.json();
+    return data.answer || "Sorry, I couldn't generate a response.";
+  }
+
+  // ── Real AI call to the backend (Express -> Ollama), with one retry ──
+  async function getReply(text){
+    try {
+      return await askBackend(text);
+    } catch (err) {
+      console.warn('AI backend error, retrying once:', err);
+      await new Promise((r) => setTimeout(r, 1500));
+      try {
+        return await askBackend(text);
+      } catch (err2) {
+        console.error('AI backend error after retry:', err2);
+        return "Sorry, the AI assistant is offline right now (The server is in shinji's PC, it might be off). Try again later, or reach out via the Contact section!";
+      }
+    }
+  }
 
   let open = false, said_hi = false, sending = false;
 
@@ -32,7 +63,7 @@
     icoX.style.display    = 'block';
     label.style.display   = 'none';
     if(window.innerWidth < 520) bd.style.display = 'block';
-    if(!said_hi){ said_hi = true; addMsg('ai', "Hey! 👋 I'm Shinji. you can ask anything!"); }
+    if(!said_hi){ said_hi = true; addMsg('ai', "Hey! 👋 I'm Shinji's AI assistant. Ask me anything — about him, or anything else!"); }
   }
 
   function close(){
@@ -75,28 +106,6 @@
     msgs.scrollTop = msgs.scrollHeight;
   }
   function hideTyping(){ const t = document.getElementById('typing-row'); if(t) t.remove(); }
-
-  // ── Real AI call to the backend (Express -> Ollama/Claude) ──
-  async function getReply(text){
-    try {
-      const res = await fetch(`${BACKEND_URL}/ask`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: text }),
-      });
-
-      if(!res.ok){
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || `Request failed with status ${res.status}`);
-      }
-
-      const data = await res.json();
-      return data.answer || "Sorry, I couldn't generate a response.";
-    } catch (err) {
-      console.error('AI backend error:', err);
-      return "Sorry, the AI assistant is offline right now (my PC might be off). Try again later, or reach out via the Contact section!";
-    }
-  }
 
   async function send(text){
     text = (text || '').trim();
