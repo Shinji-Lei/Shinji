@@ -3,3 +3,4 @@ ai-portfolio/backend/.env
 ai-portfolio/frontend/
 .DS_Store
 Thumbs.db
+*.mp4
