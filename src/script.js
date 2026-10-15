@@ -1,4 +1,4 @@
-// ── CANVAS SETUP ────────────────────────────────────────
+﻿// â”€â”€ CANVAS SETUP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const canvas = document.getElementById('c');
 const ctx    = canvas.getContext('2d');
 let W, H;
@@ -10,7 +10,7 @@ function resize(){
   buildConstellations();
 }
 
-// ── STARFIELD ───────────────────────────────────────────
+// â”€â”€ STARFIELD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class Star {
   constructor(){ this.reset(); }
   reset(){
@@ -55,7 +55,7 @@ function buildStars(){
   for(let i=0;i<N;i++) stars.push(new Star());
 }
 
-// ── ZODIAC CONSTELLATIONS ────────────────────────────────
+// â”€â”€ ZODIAC CONSTELLATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const ZODIAC_SHAPES = [
   { pts:[[0,0.5],[0.28,0.32],[0.55,0.2],[0.85,0.05],[1,0]], edges:[[0,1],[1,2],[2,3],[3,4]] },
   { pts:[[0,0.85],[0.18,0.55],[0.4,0.35],[0.6,0.1],[0.82,0.32],[1,0.6],[0.6,0.6]], edges:[[0,1],[1,2],[2,3],[3,4],[4,5],[4,6],[2,6]] },
@@ -163,7 +163,7 @@ reveals.forEach(el=>
   },{threshold:.12}).observe(el)
 );
 
-// ── CERTIFICATES: click image to expand + center + blur bg + nav ──
+// â”€â”€ CERTIFICATES: click image to expand + center + blur bg + nav â”€â”€
 document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('cert-lightbox');
   const lbImg    = document.getElementById('cert-lightbox-img');
@@ -217,5 +217,84 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') showCert(currentIndex - 1);
     if (e.key === 'ArrowRight') showCert(currentIndex + 1);
+  });
+});
+
+// â”€â”€ PROJECT PHOTOS: click cover -> enlarge in lightbox, browse with arrows â”€â”€
+document.addEventListener('DOMContentLoaded', () => {
+  const box      = document.getElementById('photo-lightbox');
+  const img      = document.getElementById('photo-lightbox-img');
+  const prevBtn  = document.getElementById('photo-lightbox-prev');
+  const nextBtn  = document.getElementById('photo-lightbox-next');
+  const closeBtn = document.getElementById('photo-lightbox-close');
+  const counter  = document.getElementById('photo-lightbox-count');
+  if (!box || !img) return;
+
+  let photos = [];
+  let index  = 0;
+
+  function render() {
+    img.style.opacity = 0;
+    img.style.transform = 'scale(.97)';
+    setTimeout(() => {
+      img.src = photos[index];
+      img.style.opacity = 1;
+      img.style.transform = 'scale(1)';
+    }, 120);
+    counter.textContent = (index + 1) + ' / ' + photos.length;
+  }
+
+  function openGallery(list, start) {
+    photos = list;
+    index  = start || 0;
+    box.classList.toggle('single', photos.length < 2);
+    img.src = photos[index];
+    img.style.opacity = 1;
+    img.style.transform = 'scale(1)';
+    counter.textContent = (index + 1) + ' / ' + photos.length;
+    box.classList.add('open');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    box.classList.remove('open');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function step(dir) {
+    if (photos.length < 2) return;
+    index = (index + dir + photos.length) % photos.length;
+    render();
+  }
+
+  // Every .proj-photo on the page (MDHUB, Portfolio Generator, ...)
+  document.querySelectorAll('.proj-photo').forEach((el) => {
+    const list = (el.getAttribute('data-photos') || '')
+      .split(',').map((p) => p.trim()).filter(Boolean);
+    if (!list.length) return;
+
+    // show how many photos are in the gallery
+    const label = el.querySelector('.proj-photo-label');
+    if (label && list.length > 1) label.textContent = 'Click to view photos (' + list.length + ')';
+
+    const go = () => openGallery(list, 0);
+    el.addEventListener('click', go);
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+    });
+  });
+
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); step(1); });
+  closeBtn.addEventListener('click', closeGallery);
+  box.addEventListener('click', (e) => { if (e.target === box) closeGallery(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') closeGallery();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
   });
 });
