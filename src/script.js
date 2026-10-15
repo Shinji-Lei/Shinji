@@ -1,4 +1,4 @@
-﻿// â”€â”€ CANVAS SETUP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── CANVAS SETUP ────────────────────────────────────────
 const canvas = document.getElementById('c');
 const ctx    = canvas.getContext('2d');
 let W, H;
@@ -10,7 +10,7 @@ function resize(){
   buildConstellations();
 }
 
-// â”€â”€ STARFIELD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── STARFIELD ───────────────────────────────────────────
 class Star {
   constructor(){ this.reset(); }
   reset(){
@@ -55,7 +55,7 @@ function buildStars(){
   for(let i=0;i<N;i++) stars.push(new Star());
 }
 
-// â”€â”€ ZODIAC CONSTELLATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── ZODIAC CONSTELLATIONS ────────────────────────────────
 const ZODIAC_SHAPES = [
   { pts:[[0,0.5],[0.28,0.32],[0.55,0.2],[0.85,0.05],[1,0]], edges:[[0,1],[1,2],[2,3],[3,4]] },
   { pts:[[0,0.85],[0.18,0.55],[0.4,0.35],[0.6,0.1],[0.82,0.32],[1,0.6],[0.6,0.6]], edges:[[0,1],[1,2],[2,3],[3,4],[4,5],[4,6],[2,6]] },
@@ -163,7 +163,7 @@ reveals.forEach(el=>
   },{threshold:.12}).observe(el)
 );
 
-// â”€â”€ CERTIFICATES: click image to expand + center + blur bg + nav â”€â”€
+// ── CERTIFICATES: click image to expand + center + blur bg + nav ──
 document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('cert-lightbox');
   const lbImg    = document.getElementById('cert-lightbox-img');
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// â”€â”€ PROJECT PHOTOS: click cover -> enlarge in lightbox, browse with arrows â”€â”€
+// ── PROJECT PHOTOS: click cover -> enlarge in lightbox, browse with arrows ──
 document.addEventListener('DOMContentLoaded', () => {
   const box      = document.getElementById('photo-lightbox');
   const img      = document.getElementById('photo-lightbox-img');

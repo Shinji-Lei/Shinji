@@ -1,4 +1,4 @@
-﻿// â”€â”€ AI CHATBOX â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── AI CHATBOX ───────────────────────────────────────────
 (function(){
   const fab     = document.getElementById('chat-toggle');
   const win     = document.getElementById('chat-window');
@@ -9,7 +9,7 @@
   const icoChat = fab.querySelector('.icon-chat');
   const icoX    = fab.querySelector('.icon-close');
 
-  // Backend URL â€” update this whenever the Cloudflare tunnel URL changes
+  // Backend URL — update this whenever the Cloudflare tunnel URL changes
   const BACKEND_URL = 'https://dubai-system-representatives-reporting.trycloudflare.com';
 
   // One retry after a short delay smooths over brief tunnel reconnects
@@ -28,7 +28,7 @@
     return data.answer || "Sorry, I couldn't generate a response.";
   }
 
-  // â”€â”€ Real AI call to the backend (Express -> Ollama), with one retry â”€â”€
+  // ── Real AI call to the backend (Express -> Ollama), with one retry ──
   async function getReply(text){
     try {
       return await askBackend(text);
@@ -63,7 +63,7 @@
     icoX.style.display    = 'block';
     label.style.display   = 'none';
     if(window.innerWidth < 520) bd.style.display = 'block';
-    if(!said_hi){ said_hi = true; addMsg('ai', "Hey! ðŸ‘‹ I'm Shinji's AI assistant. Ask me anything â€” about him, or anything else!"); }
+    if(!said_hi){ said_hi = true; addMsg('ai', "Hey! 👋 I'm Shinji's AI assistant. Ask me anything — about him, or anything else!"); }
   }
 
   function close(){
@@ -83,7 +83,7 @@
     row.className = 'msg ' + role;
     const ico = document.createElement('div');
     ico.className = 'msg-icon';
-    ico.textContent = role === 'user' ? 'ðŸ‘¤' : 'ðŸ¤–';
+    ico.textContent = role === 'user' ? '👤' : '🤖';
     const bub = document.createElement('div');
     bub.className = 'msg-bubble';
     bub.textContent = text;
@@ -97,7 +97,7 @@
     const row = document.createElement('div');
     row.className = 'msg ai'; row.id = 'typing-row';
     const ico = document.createElement('div');
-    ico.className = 'msg-icon'; ico.textContent = 'ðŸ¤–';
+    ico.className = 'msg-icon'; ico.textContent = '🤖';
     const bub = document.createElement('div');
     bub.className = 'msg-bubble typing-bubble';
     bub.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
